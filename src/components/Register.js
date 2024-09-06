@@ -74,25 +74,7 @@ const Register = () => {
         // Hash the password
         const hashedPassword = await hashPassword(formData.password);
 
-        // console.log(typeof hashedPassword);
-        // return;
-
-        // Construct the GraphQL mutation with the required name 'testRegister'
-        // const mutation = `
-        //   mutation testRegister($input: UserInput!) {
-        //     testRegister(input: $input) {
-        //       success
-        //       message
-        //       user {
-        //         id
-        //         firstName
-        //         lastName
-        //         email
-        //       }
-        //     }
-        //   }
-        // `;
-        // Updated mutation to match server expectations
+        // Mutation to match server expectations
         const mutation = `
             mutation testRegister($firstName: String!, $lastName: String!, $entityType: EntityType!, $email: String!, $password: String!) {
                 testRegister(firstName: $firstName, lastName: $lastName, entityType: $entityType, email: $email, password: $password)
@@ -109,7 +91,7 @@ const Register = () => {
             password: hashedPassword,
         };
 
-        console.log('Sending variables:', inputData); 
+        console.log('Sending variables:', inputData);
 
         try {
             // Send the request to the GraphQL endpoint
@@ -120,9 +102,7 @@ const Register = () => {
                 },
                 body: JSON.stringify({
                     query: mutation,
-                    variables: {
-                        input: inputData,
-                    },
+                    variables: inputData,
                 }),
             });
 
