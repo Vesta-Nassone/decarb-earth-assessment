@@ -66,6 +66,84 @@ const Register = () => {
         return hashHex;
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!validateForm()) return;
+
+        // Hash the password
+        const hashedPassword = await hashPassword(formData.password);
+
+        // console.log(typeof hashedPassword);
+        // return;
+
+        // Construct the GraphQL mutation with the required name 'testRegister'
+        // const mutation = `
+        //   mutation testRegister($input: UserInput!) {
+        //     testRegister(input: $input) {
+        //       success
+        //       message
+        //       user {
+        //         id
+        //         firstName
+        //         lastName
+        //         email
+        //       }
+        //     }
+        //   }
+        // `;
+        // Updated mutation to match server expectations
+        const mutation = `
+            mutation testRegister($firstName: String!, $lastName: String!, $entityType: EntityType!, $email: String!, $password: String!) {
+                testRegister(firstName: $firstName, lastName: $lastName, entityType: $entityType, email: $email, password: $password)
+            }
+        `;
+
+
+        // Prepare the input data with the hashed password
+        const inputData = {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            entityType: formData.entityType,
+            email: formData.email,
+            password: hashedPassword,
+        };
+
+        console.log('Sending variables:', inputData); 
+
+        try {
+            // Send the request to the GraphQL endpoint
+            const response = await fetch('https://league-api.staging.decarb.earth/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    query: mutation,
+                    variables: {
+                        input: inputData,
+                    },
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.errors) {
+                // Handle GraphQL errors
+                console.error('GraphQL errors:', result.errors);
+                setErrors({ form: 'An error occurred during registration.' });
+            } else {
+                // Handle successful response
+                console.log('Registration successful:', result.data.testRegister);
+                // Redirect to verification page or show a success message
+            }
+        } catch (error) {
+            // Handle fetch errors
+            console.error('Fetch error:', error);
+            setErrors({ form: 'An error occurred. Please try again later.' });
+        }
+    };
+
 
 
     return (
