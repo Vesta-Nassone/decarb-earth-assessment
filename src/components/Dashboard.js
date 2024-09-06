@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import LightHouse from './LightHouse';
+import SEOChecker from './SEOChecker';
 
 const Dashboard = () => {
     const location = useLocation();
@@ -150,6 +152,7 @@ const Dashboard = () => {
                     {/* Bar Chart */}
                     <div className='bg-white p-6 rounded-lg shadow-md'>
                         <h2 className='text-xl font-semibold mb-4'>Sales Overview</h2>
+                        <hr className="my-2" />
                         <Chart
                             options={barChartOptions}
                             series={barChartSeries}
@@ -161,12 +164,32 @@ const Dashboard = () => {
                     {/* Scatter Plot */}
                     <div className='bg-white p-6 rounded-lg shadow-md'>
                         <h2 className='text-xl font-semibold mb-4'>Data Distribution</h2>
+                        <hr className="my-2" />
                         <Chart
                             options={scatterPlotOptions}
                             series={scatterPlotSeries}
                             type='scatter'
                             height={350}
                         />
+                    </div>
+                </div>
+
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
+                    {/* Lighthouse Pie Chart */}
+                    <div className='bg-white p-6 rounded-lg shadow-md'>
+                        <h2 className='text-xl font-semibold mb-4'>Website Performance Overview</h2>
+                        <hr className="my-2" />
+                        <LightHouse />
+                    </div>
+
+                    {/* SEO Performance Metrics Chart */}
+                    <div className='bg-white p-6 rounded-lg shadow-md'>
+                        <h2 className='text-xl font-semibold mb-4'>SEO Performance Metrics</h2>
+                        <hr className="my-2" />
+                        <div className='flex items-center'>
+                            <SEOChecker />
+                            <a href="https://freetools.seobility.net/en/seocheck/decarb.earth"><img src="https://freetools.seobility.net/widget/widget.png?url=decarb.earth" alt="Seobility Score für decarb.earth" /></a>
+                        </div>
                     </div>
                 </div>
             </main>
