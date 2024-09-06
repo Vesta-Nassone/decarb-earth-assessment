@@ -117,10 +117,10 @@ const Register = () => {
                 setErrors({ form: 'An error occurred during registration.' });
             } else {
                 // Handle successful response
-                console.log('Registration successful:', result.data.testRegister);
-                // Redirect to verification page or show a success message
-                // Navigate to the verification page
-                navigate('/verify');
+                const code = result.data.testRegister;
+                console.log('Registration successful:', code);
+                // Navigate to the verification page with the code in location state.
+                navigate('/verify', { state: { code } }); // Navigate to verification page with code
             }
         } catch (error) {
             // Handle fetch errors
