@@ -13,6 +13,7 @@ const Register = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate(); // Initialize useNavigate
 
 
@@ -72,6 +73,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setLoading(true);
         if (!validateForm()) return;
 
         // Hash the password
@@ -118,9 +120,11 @@ const Register = () => {
             } else {
                 // Handle successful response
                 const code = result.data.testRegister;
+                // Set the name in localStorage before navigation
                 console.log('Registration successful:', code);
+                localStorage.setItem('name', formData.firstName);
                 // Navigate to the verification page with the code in location state.
-                navigate('/verify', { state: { code } }); // Navigate to verification page with code
+                navigate('/verify', { state: { code: code, name: formData.firstName } }); // Navigate to verification page with code
             }
         } catch (error) {
             // Handle fetch errors
@@ -237,9 +241,10 @@ const Register = () => {
                 {/* Submit Button */}
                 <button
                     type="submit"
+                    disabled={loading}
                     className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
                 >
-                    Register
+                    {loading ? 'Checking info...' : "Register"}
                 </button>
             </form>
         </div>
