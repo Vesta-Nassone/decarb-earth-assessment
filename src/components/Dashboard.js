@@ -97,7 +97,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div className='bg-gray-100 min-h-screen flex'>
+        <div className='bg-gray-50 flex h-screen'>
             {/* Sidebar */}
             <aside
                 className={`fixed top-0 left-0 h-screen bg-white border-r border-gray-200 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -145,12 +145,14 @@ const Dashboard = () => {
             </button>
 
             {/* Main Content */}
-            <main className='flex-1 p-4'>
-                <h1 className='text-3xl font-bold mb-6 text-center md:text-left'>Welcome, {name ? name : 'User'}</h1>
+            <main className='flex-1 ml-5 p-4 overflow-y-auto'>
+                <h1 className='text-3xl font-bold mb-6 text-center md:text-left'>
+                    Welcome, {name ? name : 'User'}
+                </h1>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
                     {/* Bar Chart */}
-                    <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <div className='bg-white p-6 rounded-lg shadow-custom'>
                         <h2 className='text-xl font-semibold mb-4'>Sales Overview</h2>
                         <hr className="my-2" />
                         <Chart
@@ -162,7 +164,7 @@ const Dashboard = () => {
                     </div>
 
                     {/* Scatter Plot */}
-                    <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <div className='bg-white p-6 rounded-lg shadow-custom'>
                         <h2 className='text-xl font-semibold mb-4'>Data Distribution</h2>
                         <hr className="my-2" />
                         <Chart
@@ -176,14 +178,14 @@ const Dashboard = () => {
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
                     {/* Lighthouse Pie Chart */}
-                    <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <div className='bg-white p-6 rounded-lg shadow-custom'>
                         <h2 className='text-xl font-semibold mb-4'>Website Performance Overview</h2>
                         <hr className="my-2" />
                         <LightHouse />
                     </div>
 
                     {/* SEO Performance Metrics Chart */}
-                    <div className='bg-white p-6 rounded-lg shadow-md'>
+                    <div className='bg-white p-6 rounded-lg shadow-custom'>
                         <h2 className='text-xl font-semibold mb-4'>SEO Performance Metrics</h2>
                         <hr className="my-2" />
                         <div className='flex flex-col lg:flex-row items-center justify-center'>
