@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const Register = () => {
     const [formData, setFormData] = useState({
         firstName: "",
@@ -29,6 +30,7 @@ const Register = () => {
         }));
     };
 
+
     const validateForm = () => {
         const newErrors = {};
 
@@ -50,13 +52,21 @@ const Register = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (validateForm()) {
-            // Perform form submission (e.g., API call)
-            console.log("Form Data Submitted:", formData);
-        }
+    const hashPassword = async (password) => {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+
+        // Hash the password using SHA-256
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+
+        // Convert ArrayBuffer to hex string
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+        return hashHex;
     };
+
+
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
