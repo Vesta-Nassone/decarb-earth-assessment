@@ -186,9 +186,15 @@ const Dashboard = () => {
                     <div className='bg-white p-6 rounded-lg shadow-md'>
                         <h2 className='text-xl font-semibold mb-4'>SEO Performance Metrics</h2>
                         <hr className="my-2" />
-                        <div className='flex items-center'>
-                            <SEOChecker />
-                            <a href="https://freetools.seobility.net/en/seocheck/decarb.earth"><img src="https://freetools.seobility.net/widget/widget.png?url=decarb.earth" alt="Seobility Score für decarb.earth" /></a>
+                        <div className='flex flex-col lg:flex-row items-center justify-center'>
+                            <div className='lg:w-3/4 w-full mb-4 lg:mb-0'>
+                                <SEOChecker />
+                            </div>
+                            <div className='lg:w-1/4 w-full flex justify-center'>
+                                <a href="https://freetools.seobility.net/en/seocheck/decarb.earth">
+                                    <img src="https://freetools.seobility.net/widget/widget.png?url=decarb.earth" alt="Seobility Score für decarb.earth" />
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

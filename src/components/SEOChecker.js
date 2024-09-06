@@ -8,7 +8,7 @@ const SEOChecker = () => {
             series: [{
                 name: 'SEO Metrics',
                 data: [70, 50, 66, 93, 83, 90]
-            }], 
+            }],
             labels: [
                 'Meta Information',
                 'Page Quality',
@@ -96,9 +96,7 @@ const SEOChecker = () => {
     };
 
     return (
-        <div id="seo-checker-chart" className="w-full">
-            <Chart options={getSEOChartOptions()} series={[{ name: 'SEO Metrics', data: [70, 50, 66, 93, 83, 90] }]} type="bar" height={400} />
-        </div>
+        <Chart options={getSEOChartOptions()} series={[{ name: 'SEO Metrics', data: [70, 50, 66, 93, 83, 90] }]} type="bar" height={400} />
     );
 };
 
