@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// Mock API request function
+const mockApiRequest = (inputCode, storedCode) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // Simulate a successful response
+            if (inputCode != String(storedCode)) {
+                resolve(true);
+            } else {
+                reject(false);
+            }
+        }, 1000); // Simulate network delay for 1s
+    });
+};
+
 const Verification = () => {
     const location = useLocation();
     const [inputCode, setInputCode] = useState('');
     const [message, setMessage] = useState('');
     const [isVerified, setIsVerified] = useState(false);
+    const [loading, setLoading] = useState(false); // To handle loading state
 
     const storedCode = location.state?.code; // Get the verification code from location state
 
@@ -13,15 +28,27 @@ const Verification = () => {
         setInputCode(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (inputCode === String(storedCode)) {
-            setIsVerified(true);
-            setMessage('Verification successful!');
-            // Redirect to dashboard
-        } else {
+        setLoading(true); // Start loading
+
+        try {
+            // Simulate API call
+            const result = await mockApiRequest(inputCode, storedCode);
+
+            if (result) {
+                setIsVerified(true);
+                setMessage('Verification successful!');
+                // Redirect to dashboard or perform next steps
+            } else {
+                setIsVerified(false);
+                setMessage('Verification code does not match.');
+            }
+        } catch (error) {
             setIsVerified(false);
-            setMessage('Verification code does not match.');
+            setMessage('Verification failed. Please try again.');
+        } finally {
+            setLoading(false); // Stop loading
         }
     };
 
@@ -44,9 +71,10 @@ const Verification = () => {
                 </div>
                 <button
                     type="submit"
+                    disabled={loading}
                     className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
                 >
-                    Verify
+                    {loading ? 'Verifying...' : "Verify"}
                 </button>
                 {message && (
                     <p className={`mt-4 text-xs ${isVerified ? 'text-green-500' : 'text-red-500'}`}>{message}</p>
