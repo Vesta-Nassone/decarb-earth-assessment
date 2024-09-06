@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
       },
+      boxShadow: {
+        custom: '0 2px 10px rgba(0,0,0,.2);'
+      }
     },
   },
   plugins: [],
