@@ -15,10 +15,10 @@ const Verification = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (inputCode === storedCode) {
+        if (inputCode === String(storedCode)) {
             setIsVerified(true);
             setMessage('Verification successful!');
-            // Redirect or handle successful verification
+            // Redirect to dashboard
         } else {
             setIsVerified(false);
             setMessage('Verification code does not match.');
