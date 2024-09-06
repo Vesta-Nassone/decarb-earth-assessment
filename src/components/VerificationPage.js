@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Mock API request function
 const mockApiRequest = (inputCode, storedCode) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             // Simulate a successful response
-            if (inputCode != String(storedCode)) {
+            if (inputCode === String(storedCode)) {
                 resolve(true);
             } else {
                 reject(false);
@@ -17,6 +17,7 @@ const mockApiRequest = (inputCode, storedCode) => {
 
 const Verification = () => {
     const location = useLocation();
+    const navigate = useNavigate(); // Initialize useNavigate
     const [inputCode, setInputCode] = useState('');
     const [message, setMessage] = useState('');
     const [isVerified, setIsVerified] = useState(false);
@@ -39,7 +40,8 @@ const Verification = () => {
             if (result) {
                 setIsVerified(true);
                 setMessage('Verification successful!');
-                // Redirect to dashboard or perform next steps
+                // Redirect to dashboard
+                navigate('/dashboard', { replace: true });
             } else {
                 setIsVerified(false);
                 setMessage('Verification code does not match.');
