@@ -30,7 +30,32 @@ const Register = () => {
     };
 
     const validateForm = () => {
-        
+        const newErrors = {};
+
+        if (!formData.firstName) newErrors.firstName = 'First name is required';
+        if (!formData.lastName) newErrors.lastName = 'Last name is required';
+        if (!formData.entityType) newErrors.entityType = 'Entity type is required';
+        if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid email is required';
+        if (!formData.password || formData.password.length < 8) {
+            newErrors.password = 'Password must be at least 8 characters';
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
+            newErrors.password = 'Password must include at least one special character';
+        } else if (!/[A-Z]/.test(formData.password)) {
+            newErrors.password = 'Password must include at least one uppercase letter';
+        }
+        // Could end another check for number but that's probably overkill...
+        if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            // Perform form submission (e.g., API call)
+            console.log("Form Data Submitted:", formData);
+        }
     };
 
     return (
@@ -39,7 +64,8 @@ const Register = () => {
                 className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm mx-auto"
                 onSubmit={handleSubmit}
             >
-                <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+                <img className="mx-auto h-[80px] w-[80px]" alt="Logo" src="/images/planet.png" />
+                <h2 className="mt-2 text-2xl font-bold mb-6 text-center">Register</h2>
 
                 {/* First Name */}
                 <div className="mb-4">
