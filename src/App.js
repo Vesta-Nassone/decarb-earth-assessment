@@ -1,7 +1,8 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './components/Register';
-import VerificationPage from './components/VerificationPage'; // Import the VerificationPage component
+import VerificationPage from './components/VerificationPage';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/verify" element={<VerificationPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>
