@@ -50,7 +50,7 @@ const Sidebar = ({ logout, updateProfile, sales }) => {
                             </li>
                             <li>
                                 <a
-                                    href="https://github.com/Vesta-Nassone"
+                                    href="https://github.com/Vesta-Nassone/decarb-earth-assessment"
                                     target="_blank"
                                     className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100" rel="noreferrer"
                                 >
