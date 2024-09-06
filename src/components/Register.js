@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 
 const Register = () => {
@@ -12,6 +13,8 @@ const Register = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate(); // Initialize useNavigate
+
 
     // Function to handle input changes and clear errors
     const handleChange = (e) => {
@@ -116,6 +119,8 @@ const Register = () => {
                 // Handle successful response
                 console.log('Registration successful:', result.data.testRegister);
                 // Redirect to verification page or show a success message
+                // Navigate to the verification page
+                navigate('/verify');
             }
         } catch (error) {
             // Handle fetch errors
