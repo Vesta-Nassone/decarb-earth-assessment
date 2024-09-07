@@ -1,5 +1,5 @@
 import React from 'react';
-import LightHouse from './LightHouse'; // Import LightHouse component
+import LightHouse from './charts/LightHouse'; // Import LightHouse component
 import SEOChecker from './charts/SEOChecker'; // Import SEOChecker component
 import BarChart from './charts/BarChart'; // Import the BarChart component
 import ScatterPlot from './charts/ScatterPlot'; // Import the ScatterPlot component
