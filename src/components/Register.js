@@ -74,7 +74,10 @@ const Register = () => {
         e.preventDefault();
 
         setLoading(true);
-        if (!validateForm()) return;
+        if (!validateForm()){
+            setLoading(false);
+            return;
+        };
 
         // Hash the password
         const hashedPassword = await hashPassword(formData.password);
