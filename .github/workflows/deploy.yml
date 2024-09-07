@@ -1,0 +1,19 @@
+name: Deploy site
+
+on:
+  push:
+    branches:
+    - main
+    - release/*
+
+# A workflow contains a single job called "build"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    #Runs a single command using runners shell
+    - name: Deploy site
+      run: curl -X POST -d {} ${{ secretes.NETLIFY_BUILD_HOOK }}
