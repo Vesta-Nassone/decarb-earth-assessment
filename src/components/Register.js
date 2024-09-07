@@ -134,6 +134,9 @@ const Register = () => {
                 // Save the name in localStorage and navigate to the verification page
                 console.log('Registration successful:', code);
                 localStorage.setItem('name', formData.firstName);
+                localStorage.setItem('surname', formData.lastName);
+                localStorage.setItem("email", formData.email);
+                localStorage.setItem("entityType", formData.entityType);
                 navigate('/verify', { state: { code: code, name: formData.firstName } }); // Navigate to verification page with code and name in location state.
             }
         } catch (error) {
