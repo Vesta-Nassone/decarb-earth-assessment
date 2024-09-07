@@ -7,10 +7,11 @@ const DashboardLayout = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(false); // State to manage sidebar visibility
 
     // Function to handle navigation to the sales page
-    const handleNavigate = () => {
-        console.log('navigate to sales page');
-        navigate('/sales');
+    const handleNavigate = (route) => {
+        console.log(`Navigating to ${route} page`);
+        navigate(`/${route}`);
     };
+
 
     // Function to handle navigation to the update profile page
     const handleUpdateProfile = () => {
@@ -41,8 +42,10 @@ const DashboardLayout = () => {
                 <Sidebar
                     logout={handleLogout}
                     updateProfile={handleUpdateProfile}
-                    sales={handleNavigate}
+                    seo={() => handleNavigate("seo")}
+                    performance={() => handleNavigate("performance")}
                 />
+
             </aside>
 
             {/* Button to toggle the sidebar on small screens */}
