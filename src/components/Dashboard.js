@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import LightHouse from './LightHouse';
-import SEOChecker from './SEOChecker';
-import BarChart from './BarChart'; // Import the BarChart component
-import ScatterPlot from './ScatterPlot'; // Import the ScatterPlot component
+import SEOChecker from './charts/SEOChecker';
+import BarChart from './charts/BarChart'; // Import the BarChart component
+import ScatterPlot from './charts/ScatterPlot'; // Import the ScatterPlot component
 
 const Dashboard = () => {
     const navigate = useNavigate();

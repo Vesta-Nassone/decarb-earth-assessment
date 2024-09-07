@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import BarPlaceholder from './BarPlaceholder';
+import ScatterPlaceholder from '../ScatterPlaceholder';
 
-const BarChart = ({ options, series }) => {
+const ScatterPlot = ({ options, series }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Simulate loading delay
-        const timer = setTimeout(() => setLoading(false), 5000);
+        const timer = setTimeout(() => setLoading(false), 2000);
         return () => clearTimeout(timer);
     }, []);
 
     return (
         <div className='bg-white p-6 rounded-lg shadow-custom'>
-            <h2 className='text-xl font-semibold mb-4'>Top 10 CO2 Contributors</h2>
+            <h2 className='text-xl font-semibold mb-4'>Atmospheric CO2 (2000 - 2024)</h2>
             <hr className="my-2" />
             {loading ? (
-                <BarPlaceholder />
+                <ScatterPlaceholder />
             ) : (
                 <Chart
                     options={options}
                     series={series}
-                    type='bar'
+                    type='scatter'
                     height={350}
                 />
             )}
@@ -29,4 +29,4 @@ const BarChart = ({ options, series }) => {
     );
 };
 
-export default BarChart;
+export default ScatterPlot;
