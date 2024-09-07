@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import React from 'react';
 import LightHouse from './LightHouse';
 import SEOChecker from './charts/SEOChecker';
 import BarChart from './charts/BarChart'; // Import the BarChart component
 import ScatterPlot from './charts/ScatterPlot'; // Import the ScatterPlot component
 
 const Dashboard = () => {
-    const navigate = useNavigate();
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
     // Sample data for bar chart
     const barChartOptions = {
@@ -123,27 +119,7 @@ const Dashboard = () => {
         },
     ];
 
-    const handleNavigate = () => {
-        console.log('navigate to sales page');
-        navigate('/sales');
-    };
-
-    const handleUpdateProfile = () => {
-        console.log('Update profile');
-        navigate('/update-profile');
-    };
-
-    const handleLogout = () => {
-        console.log('Logging out...');
-        localStorage.removeItem('name');
-        navigate('/', { replace: true });
-    };
-
     const name = localStorage.getItem('name');
-
-    const toggleSidebar = () => {
-        setSidebarOpen(!isSidebarOpen);
-    };
 
     return (
         <div>
