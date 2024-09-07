@@ -1,5 +1,5 @@
 import React from 'react';
-import '../ScatterPlaceholder.css'; // Import the CSS file for styling
+import '../../ScatterPlaceholder.css'; // Import the CSS file for styling
 
 const ScatterPlaceholder = () => {
     return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import BarPlaceholder from '../BarPlaceholder';
+import BarPlaceholder from '../loaders/BarPlaceholder';
 
 const BarChart = ({ options, series }) => {
     const [loading, setLoading] = useState(true);

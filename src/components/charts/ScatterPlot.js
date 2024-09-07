@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import ScatterPlaceholder from '../ScatterPlaceholder';
+import ScatterPlaceholder from '../loaders/ScatterPlaceholder';
 
 const ScatterPlot = ({ options, series }) => {
     const [loading, setLoading] = useState(true);
