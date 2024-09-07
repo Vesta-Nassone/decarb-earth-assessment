@@ -113,7 +113,7 @@ const SEOChecker = () => {
             ) : (
                 <div className='flex flex-col lg:flex-row items-center justify-center'>
                     <div className='lg:w-3/4 w-full mb-4 lg:mb-0'>
-                        <Chart options={getSEOChartOptions()} series={[{ name: 'SEO Metrics', data: [70, 50, 66, 93, 83, 90] }]} type="bar" height={400} />
+                        <Chart options={getSEOChartOptions()} series={[{ name: 'SEO Metrics', data: [70, 50, 66, 93, 83, 90] }]} type="bar" height={350} />
                     </div>
                     <div className='lg:w-1/4 w-full flex justify-center'>
                         <a href="https://freetools.seobility.net/en/seocheck/decarb.earth">
