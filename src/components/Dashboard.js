@@ -20,27 +20,46 @@ const Dashboard = () => {
         plotOptions: {
             bar: {
                 horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded',
+                columnWidth: '50%',
             },
         },
         dataLabels: {
             enabled: false,
         },
         xaxis: {
-            categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            categories: [
+                'China',
+                'USA',
+                'India',
+                'Russia',
+                'Japan',
+                'Germany',
+                'Iran',
+                'South Korea',
+                'Saudi Arabia',
+                'Indonesia',
+            ],
+            title:{
+                text: "Country",
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'CO2 Emissions (Million Metric Tons)',
+            },
         },
         fill: {
             opacity: 1,
         },
     };
-
+    
     const barChartSeries = [
         {
-            name: 'Sales',
-            data: [30, 40, 35, 50, 49, 60, 70],
+            name: 'CO2 Emissions',
+            data: [10100, 5420, 2560, 1520, 1120, 750, 720, 620, 580, 540], // Sample data
         },
     ];
+    
 
     // Sample data for scatter plot
     const scatterPlotOptions = {
