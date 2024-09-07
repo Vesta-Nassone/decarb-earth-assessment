@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const Register = () => {
+    // State to manage form data
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -12,16 +12,18 @@ const Register = () => {
         confirmPassword: "",
     });
 
+    // State to manage validation errors
     const [errors, setErrors] = useState({});
+    // State to manage loading state during submission
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate(); // Initialize useNavigate
-
+    // Initialize useNavigate hook for navigation
+    const navigate = useNavigate();
 
     // Function to handle input changes and clear errors
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Update form data
+        // Update form data state
         setFormData({
             ...formData,
             [name]: value,
@@ -34,10 +36,11 @@ const Register = () => {
         }));
     };
 
-
+    // Function to validate form fields
     const validateForm = () => {
         const newErrors = {};
 
+        // Check if required fields are filled
         if (!formData.firstName) newErrors.firstName = 'First name is required';
         if (!formData.lastName) newErrors.lastName = 'Last name is required';
         if (!formData.entityType) newErrors.entityType = 'Entity type is required';
@@ -48,19 +51,24 @@ const Register = () => {
             newErrors.password = 'Password must include at least one special character';
         } else if (!/[A-Z]/.test(formData.password)) {
             newErrors.password = 'Password must include at least one uppercase letter';
+        } else if (!/\d/.test(formData.password)) {
+            newErrors.password = 'Password must include at least one number'; // Check for numeric digit
         }
-        // Could end another check for number but that's probably overkill...
         if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
 
+        // Update the errors state and return true if no errors
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
+    // Function to hash the password using SHA-256
+    // NOTE: Client side encryption is not recommended.
+    // To keep things simple I am using this function, could also use the bcrypt library but, I wanted to avoid adding unnecessary packages.
     const hashPassword = async (password) => {
         const encoder = new TextEncoder();
         const data = encoder.encode(password);
 
-        // Hash the password using SHA-256
+        // Hash the password
         const hashBuffer = await crypto.subtle.digest('SHA-256', data);
 
         // Convert ArrayBuffer to hex string
@@ -70,27 +78,27 @@ const Register = () => {
         return hashHex;
     };
 
+    // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setLoading(true);
-        if (!validateForm()){
-            setLoading(false);
+        setLoading(true); // Set loading state to true
+        if (!validateForm()) {
+            setLoading(false); // Set loading state to false if validation fails
             return;
         };
 
-        // Hash the password
+        // Hash the password before sending
         const hashedPassword = await hashPassword(formData.password);
 
-        // Mutation to match server expectations
+        // GraphQL mutation string
         const mutation = `
             mutation testRegister($firstName: String!, $lastName: String!, $entityType: EntityType!, $email: String!, $password: String!) {
                 testRegister(firstName: $firstName, lastName: $lastName, entityType: $entityType, email: $email, password: $password)
             }
         `;
 
-
-        // Prepare the input data with the hashed password
+        // Prepare input data with the hashed password
         const inputData = {
             firstName: formData.firstName,
             lastName: formData.lastName,
@@ -123,20 +131,22 @@ const Register = () => {
             } else {
                 // Handle successful response
                 const code = result.data.testRegister;
-                // Set the name in localStorage before navigation
+                // Save the name in localStorage and navigate to the verification page
                 console.log('Registration successful:', code);
                 localStorage.setItem('name', formData.firstName);
-                // Navigate to the verification page with the code in location state.
-                navigate('/verify', { state: { code: code, name: formData.firstName } }); // Navigate to verification page with code
+                localStorage.setItem('surname', formData.lastName);
+                localStorage.setItem("email", formData.email);
+                localStorage.setItem("entityType", formData.entityType);
+                navigate('/verify', { state: { code: code, name: formData.firstName } }); // Navigate to verification page with code and name in location state.
             }
         } catch (error) {
             // Handle fetch errors
             console.error('Fetch error:', error);
             setErrors({ form: 'An error occurred. Please try again later.' });
+        } finally {
+            setLoading(false); // Set loading state to false after request
         }
     };
-
-
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -147,9 +157,12 @@ const Register = () => {
                 <img className="mx-auto h-[80px] w-[80px]" alt="Logo" src="/images/planet.png" />
                 <h2 className="mt-2 text-2xl font-bold mb-6 text-center">Register</h2>
 
-                {/* First Name */}
+                {/* First Name Input */}
                 <div className="mb-4">
-                    <label className="block text-gray-700">First Name</label>
+                    <label className="text-gray-700 flex items-center">
+                        First Name
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <input
                         type="text"
                         name="firstName"
@@ -162,9 +175,12 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Last Name */}
+                {/* Last Name Input */}
                 <div className="mb-4">
-                    <label className="block text-gray-700">Last Name</label>
+                    <label className="text-gray-700 flex items-center">
+                        Last Name
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <input
                         type="text"
                         name="lastName"
@@ -177,9 +193,12 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Entity Type */}
+                {/* Entity Type Select */}
                 <div className="mb-4">
-                    <label className="block text-gray-700">Entity Type</label>
+                    <label className="text-gray-700 flex items-center">
+                        Entity Type
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <select
                         name="entityType"
                         value={formData.entityType}
@@ -196,9 +215,12 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Email */}
+                {/* Email Input */}
                 <div className="mb-4">
-                    <label className="block text-gray-700">Email Address</label>
+                    <label className="text-gray-700 flex items-center">
+                        Email Address
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <input
                         type="email"
                         name="email"
@@ -211,9 +233,12 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Password */}
+                {/* Password Input */}
                 <div className="mb-4">
-                    <label className="block text-gray-700">Password</label>
+                    <label className="text-gray-700 flex items-center">
+                        Password
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <input
                         type="password"
                         name="password"
@@ -226,9 +251,12 @@ const Register = () => {
                     )}
                 </div>
 
-                {/* Confirm Password */}
+                {/* Confirm Password Input */}
                 <div className="mb-4">
-                    <label className="block text-gray-700">Confirm Password</label>
+                    <label className="text-gray-700 flex items-center">
+                        Confirm Password
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <input
                         type="password"
                         name="confirmPassword"
@@ -242,13 +270,18 @@ const Register = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
-                >
-                    {loading ? 'Checking info...' : "Register"}
-                </button>
+                <div className="mb-6">
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        disabled={loading} // Disable button while loading
+                    >
+                        {loading ? "Registering..." : "Register"} {/* Show loading state */}
+                    </button>
+                    {errors.form && (
+                        <p className="text-red-500 text-xs text-center mt-2">{errors.form}</p>
+                    )}
+                </div>
             </form>
         </div>
     );

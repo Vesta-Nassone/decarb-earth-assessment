@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import SEOCheckerPlaceholder from './loaders/SEOCheckerPlaceholder'; // Make sure this component is imported
+import SEOCheckerPlaceholder from '../loaders/SEOCheckerPlaceholder'; // Make sure this component is imported
 
 const SEOChecker = () => {
     const [loading, setLoading] = useState(true);

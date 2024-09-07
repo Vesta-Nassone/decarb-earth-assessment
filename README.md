@@ -1,6 +1,6 @@
 # Getting Started with the Project
 
-### [Live Demo](http://example.com) 
+### [Live Demo](https://decarb-earth-assessment.netlify.app/) 
 
 ### `npm start`
 
