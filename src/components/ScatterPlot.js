@@ -1,4 +1,3 @@
-// src/components/ScatterPlot.js
 import React from 'react';
 import Chart from 'react-apexcharts';
 

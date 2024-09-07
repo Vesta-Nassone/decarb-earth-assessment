@@ -52,32 +52,59 @@ const Dashboard = () => {
             title: {
                 text: 'Year',
             },
+            tickAmount: 12, // Ensure the x-axis shows enough ticks for all years
+            labels: {
+                formatter: (value) => parseInt(value), // Show years as whole numbers
+            },
         },
         yaxis: {
             title: {
                 text: 'CO2 Levels (parts per million)',
             },
         },
+        tooltip: {
+            x: {
+                formatter: (val) => `Year: ${val}`,
+            },
+            y: {
+                formatter: (val) => `${val} ppm`,
+            },
+        },
     };
-
+    
     const scatterPlotSeries = [
         {
-            name: 'CO2 Levels()',
+            name: 'CO2 Levels',
             data: [
-                [2000, 10],
-                [2001, 20],
-                [2003, 30],
-                [2004, 40],
-                [2005, 50],
-                [2006, 60],
-                [2007, 70],
-                [2008, 70],
-                [2009, 80],
-                [2010, 90],
+                [2000, 370],
+                [2001, 372],
+                [2002, 374],
+                [2003, 376],
+                [2004, 378],
+                [2005, 380],
+                [2006, 382],
+                [2007, 384],
+                [2008, 386],
+                [2009, 388],
+                [2010, 390],
+                [2011, 392],
+                [2012, 394],
+                [2013, 396],
+                [2014, 398],
+                [2015, 400],
+                [2016, 402],
+                [2017, 404],
+                [2018, 406],
+                [2019, 408],
+                [2020, 410],
+                [2021, 412],
+                [2022, 414],
+                [2023, 416],
+                [2024, 418],
             ],
         },
     ];
-
+    
     const handleNavigate = () => {
         console.log('navigate to sales page');
         navigate('/sales');
