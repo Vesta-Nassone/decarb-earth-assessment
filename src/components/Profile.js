@@ -8,7 +8,8 @@ const Profile = () => {
     // Retrieve profile data from localStorage
     const profileData = {
         name: localStorage.getItem('name') || 'John', // Default value if not found
-        surname: localStorage.getItem('surname') || 'Doe', // Default value if not found
+        surname: localStorage.getItem('surname') || 'johndoe@gmail.com', // Default value if not found
+        email: localStorage.getItem('email') || 'Doe', // Default value if not found
         entityType: localStorage.getItem('entityType') || 'Individual', // Default value if not found
         password: '********', // Placeholder for password, replace with actual value if necessary
     };
@@ -41,6 +42,17 @@ const Profile = () => {
                 <input
                     type="text"
                     value={profileData.surname}
+                    readOnly
+                    className="w-full p-2 border border-gray-300 rounded-md bg-gray-100"
+                />
+            </div>
+
+            {/* Email field */}
+            <div className="mb-4">
+                <label className="block text-gray-700 font-semibold mb-1">Email</label>
+                <input
+                    type="text"
+                    value={profileData.email}
                     readOnly
                     className="w-full p-2 border border-gray-300 rounded-md bg-gray-100"
                 />

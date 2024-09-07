@@ -14,7 +14,7 @@ const Sidebar = ({ logout, updateProfile, seo, performance }) => {
                         {/* Menu Items */}
                         <li>
                             <a
-                                href="/dashboard"
+                                href="/app/dashboard"
                                 className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100"
                             >
                                 <svg
@@ -43,7 +43,7 @@ const Sidebar = ({ logout, updateProfile, seo, performance }) => {
                                 onClick={performance}
                                 className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 cursor-pointer"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" classname="w-6 h-6 text-gray-500 transition duration-75" width="24px" fill="currentColor"><path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" className="w-6 h-6 text-gray-500 transition duration-75" width="24px" fill="currentColor"><path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z" /></svg>
 
                                 <span className="ml-3">Performance</span>
                             </p>

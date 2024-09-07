@@ -51,7 +51,7 @@ const Verification = () => {
                 setMessage('Verification successful!'); // Display success message
                 // Redirect to dashboard upon successful verification
                 // Use replace true to prevent push the to history. Cannot go back to verify by pressing the back button in the browser.
-                navigate('/dashboard', { replace: true });
+                navigate('/app/dashboard', { replace: true });
             } else {
                 setIsVerified(false); // Set verified status to false if the codes don't match
                 setMessage('Verification code does not match.'); // Display error message
@@ -132,8 +132,8 @@ const Verification = () => {
 
                 {/* Conditionally render the code based on visibility */}
                 {viewPassword && (
-                    <div className="text-lg text-gray-700">
-                        <p>Your verification code is: <span className="font-bold">{storedCode}</span></p> {/* Display the verification code */}
+                    <div className="text-lg text-gray-700 mt-3">
+                        <p>Your verification code is: <span className="font-semibold text-sm">{storedCode}</span></p> {/* Display the verification code */}
                     </div>
                 )}
             </form>

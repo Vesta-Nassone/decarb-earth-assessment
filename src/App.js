@@ -40,7 +40,7 @@ function App() {
 
           {/* Route for authenticated users, redirects to registration if not authenticated */}
           <Route
-            path="/"
+            path="/app"
             element={isAuthenticated ? <DashboardLayout /> : <Navigate to="/" />}
           >
             {/* Nested routes under DashboardLayout */}

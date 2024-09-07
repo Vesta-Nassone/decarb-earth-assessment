@@ -9,7 +9,7 @@ const DashboardLayout = () => {
     // Function to handle navigation to specified page
     const handleNavigate = (route) => {
         console.log(`Navigating to ${route} page`);
-        navigate(`/${route}`);
+        navigate(`/app/${route}`);
     };
 
     // Function to handle user logout and redirect to the home page
