@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Chart from 'react-apexcharts';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import LightHouse from './LightHouse';
 import SEOChecker from './SEOChecker';
+import BarChart from './BarChart'; // Import the BarChart component
+import ScatterPlot from './ScatterPlot'; // Import the ScatterPlot component
 
 const Dashboard = () => {
     const location = useLocation();
@@ -49,25 +50,30 @@ const Dashboard = () => {
         },
         xaxis: {
             title: {
-                text: 'X Axis',
+                text: 'Year',
             },
         },
         yaxis: {
             title: {
-                text: 'Y Axis',
+                text: 'CO2 Levels (parts per million)',
             },
         },
     };
 
     const scatterPlotSeries = [
         {
-            name: 'Series 1',
+            name: 'CO2 Levels()',
             data: [
-                [1, 10],
-                [2, 20],
-                [3, 30],
-                [4, 40],
-                [5, 50],
+                [2000, 10],
+                [2001, 20],
+                [2003, 30],
+                [2004, 40],
+                [2005, 50],
+                [2006, 60],
+                [2007, 70],
+                [2008, 70],
+                [2009, 80],
+                [2010, 90],
             ],
         },
     ];
@@ -83,22 +89,19 @@ const Dashboard = () => {
     };
 
     const handleLogout = () => {
-        // Implement logout logic here
         console.log('Logging out...');
         localStorage.removeItem('name');
-        navigate('/login');
+        navigate('/');
     };
 
     const name = localStorage.getItem('name');
 
-    // Toggle sidebar visibility
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
 
     return (
         <div className='bg-gray-50 flex h-screen'>
-            {/* Sidebar */}
             <aside
                 className={`fixed top-0 left-0 h-screen bg-white border-r border-gray-200 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     } lg:translate-x-0 lg:relative lg:flex z-40 w-64`}
@@ -110,7 +113,6 @@ const Dashboard = () => {
                 />
             </aside>
 
-            {/* Hamburger Menu */}
             <button
                 onClick={toggleSidebar}
                 className='lg:hidden fixed top-4 left-4 z-50 p-2 text-gray-600 bg-white rounded-full shadow focus:outline-none focus:ring-2 focus:ring-gray-100'
@@ -144,7 +146,6 @@ const Dashboard = () => {
                 )}
             </button>
 
-            {/* Main Content */}
             <main className='flex-1 ml-5 p-4 overflow-y-auto'>
                 <h1 className='text-3xl font-bold mb-6 text-center md:text-left'>
                     Welcome, {name ? name : 'User'}
@@ -152,39 +153,19 @@ const Dashboard = () => {
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
                     {/* Bar Chart */}
-                    <div className='bg-white p-6 rounded-lg shadow-custom'>
-                        <h2 className='text-xl font-semibold mb-4'>Sales Overview</h2>
-                        <hr className="my-2" />
-                        <Chart
-                            options={barChartOptions}
-                            series={barChartSeries}
-                            type='bar'
-                            height={350}
-                        />
-                    </div>
+                    <BarChart options={barChartOptions} series={barChartSeries} />
 
                     {/* Scatter Plot */}
-                    <div className='bg-white p-6 rounded-lg shadow-custom'>
-                        <h2 className='text-xl font-semibold mb-4'>Data Distribution</h2>
-                        <hr className="my-2" />
-                        <Chart
-                            options={scatterPlotOptions}
-                            series={scatterPlotSeries}
-                            type='scatter'
-                            height={350}
-                        />
-                    </div>
+                    <ScatterPlot options={scatterPlotOptions} series={scatterPlotSeries} />
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
-                    {/* Lighthouse Pie Chart */}
                     <div className='bg-white p-6 rounded-lg shadow-custom'>
-                        <h2 className='text-xl font-semibold mb-4'>Website Performance Overview</h2>
-                        <hr className="my-2" />
+                        {/* LightHouse Pie Chart */}
                         <LightHouse />
                     </div>
 
-                    {/* SEO Performance Metrics Chart */}
+                    {/* SEO Checker Pie Chart */}
                     <div className='bg-white p-6 rounded-lg shadow-custom'>
                         <h2 className='text-xl font-semibold mb-4'>SEO Performance Metrics</h2>
                         <hr className="my-2" />
@@ -194,7 +175,7 @@ const Dashboard = () => {
                             </div>
                             <div className='lg:w-1/4 w-full flex justify-center'>
                                 <a href="https://freetools.seobility.net/en/seocheck/decarb.earth">
-                                    <img src="https://freetools.seobility.net/widget/widget.png?url=decarb.earth" alt="Seobility Score für decarb.earth" />
+                                    <img src="https://freetools.seobility.net/widget/widget.png?url=decarb.earth" alt="Seobility Score for decarb.earth" />
                                 </a>
                             </div>
                         </div>
