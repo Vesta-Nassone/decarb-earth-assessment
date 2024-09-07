@@ -137,7 +137,7 @@ const Dashboard = () => {
     const handleLogout = () => {
         console.log('Logging out...');
         localStorage.removeItem('name');
-        navigate('/');
+        navigate('/', { replace: true });
     };
 
     const name = localStorage.getItem('name');
