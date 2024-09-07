@@ -5,6 +5,8 @@ import Dashboard from './components/Dashboard'; // Import the Dashboard componen
 import Profile from './components/Profile'; // Import the Profile component
 import DashboardLayout from './components/DashboardLayout'; // Import the DashboardLayout component for authenticated routes
 import { useEffect, useState } from 'react'; // Import React hooks
+import SEOChecker from './components/charts/SEOChecker';
+import LightHouse from './components/charts/LightHouse';
 
 function App() {
   // State to determine if the user is authenticated
@@ -44,6 +46,8 @@ function App() {
             {/* Nested routes under DashboardLayout */}
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="update-profile" element={<Profile />} />
+            <Route path="seo" element={<SEOChecker />} />
+            <Route path="performance" element={<LightHouse />} />
           </Route>
         </Routes>
       </div>
