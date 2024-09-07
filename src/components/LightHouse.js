@@ -74,6 +74,8 @@ const LightHouse = () => {
 
     return (
         <div id="light-house-chart" className="max-w-lg mx-auto">
+            <h2 className='text-xl font-semibold mb-4'>Website Performance Overview</h2>
+            <hr className="my-2" />
             <Chart options={getLightHouseChartOptions()} series={[40, 82, 75, 91]} type="donut" height={400} />
         </div>
     );
