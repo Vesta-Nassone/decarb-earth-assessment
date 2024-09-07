@@ -39,7 +39,7 @@ const Dashboard = () => {
                 'Saudi Arabia',
                 'Indonesia',
             ],
-            title:{
+            title: {
                 text: "Country",
             }
         },
@@ -52,14 +52,14 @@ const Dashboard = () => {
             opacity: 1,
         },
     };
-    
+
     const barChartSeries = [
         {
             name: 'CO2 Emissions',
             data: [10100, 5420, 2560, 1520, 1120, 750, 720, 620, 580, 540], // Sample data
         },
     ];
-    
+
 
     // Sample data for scatter plot
     const scatterPlotOptions = {
@@ -90,7 +90,7 @@ const Dashboard = () => {
             },
         },
     };
-    
+
     const scatterPlotSeries = [
         {
             name: 'CO2 Levels',
@@ -123,7 +123,7 @@ const Dashboard = () => {
             ],
         },
     ];
-    
+
     const handleNavigate = () => {
         console.log('navigate to sales page');
         navigate('/sales');
@@ -206,26 +206,11 @@ const Dashboard = () => {
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-8'>
-                    <div className='bg-white p-6 rounded-lg shadow-custom'>
-                        {/* LightHouse Pie Chart */}
-                        <LightHouse />
-                    </div>
+                    {/* LightHouse Pie Chart */}
+                    <LightHouse />
 
                     {/* SEO Checker Pie Chart */}
-                    <div className='bg-white p-6 rounded-lg shadow-custom'>
-                        <h2 className='text-xl font-semibold mb-4'>SEO Performance Metrics</h2>
-                        <hr className="my-2" />
-                        <div className='flex flex-col lg:flex-row items-center justify-center'>
-                            <div className='lg:w-3/4 w-full mb-4 lg:mb-0'>
-                                <SEOChecker />
-                            </div>
-                            <div className='lg:w-1/4 w-full flex justify-center'>
-                                <a href="https://freetools.seobility.net/en/seocheck/decarb.earth">
-                                    <img src="https://freetools.seobility.net/widget/widget.png?url=decarb.earth" alt="Seobility Score for decarb.earth" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <SEOChecker />
                 </div>
             </main>
         </div>
