@@ -6,17 +6,10 @@ const DashboardLayout = () => {
     const navigate = useNavigate(); // Hook to navigate between routes
     const [isSidebarOpen, setSidebarOpen] = useState(false); // State to manage sidebar visibility
 
-    // Function to handle navigation to the sales page
+    // Function to handle navigation to specified page
     const handleNavigate = (route) => {
         console.log(`Navigating to ${route} page`);
         navigate(`/${route}`);
-    };
-
-
-    // Function to handle navigation to the update profile page
-    const handleUpdateProfile = () => {
-        console.log('Update profile');
-        navigate('/update-profile');
     };
 
     // Function to handle user logout and redirect to the home page
@@ -41,7 +34,7 @@ const DashboardLayout = () => {
                 {/* Sidebar actions passed as props */}
                 <Sidebar
                     logout={handleLogout}
-                    updateProfile={handleUpdateProfile}
+                    updateProfile={() => handleNavigate("update-profile")}
                     seo={() => handleNavigate("seo")}
                     performance={() => handleNavigate("performance")}
                 />
