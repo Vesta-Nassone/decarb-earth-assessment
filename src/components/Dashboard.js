@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import LightHouse from './LightHouse';
 import SEOChecker from './SEOChecker';
@@ -7,7 +7,6 @@ import BarChart from './BarChart'; // Import the BarChart component
 import ScatterPlot from './ScatterPlot'; // Import the ScatterPlot component
 
 const Dashboard = () => {
-    const location = useLocation();
     const navigate = useNavigate();
     const [isSidebarOpen, setSidebarOpen] = useState(false);
 
